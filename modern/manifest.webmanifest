@@ -1,0 +1,10 @@
+{
+  "name": "Machly — Campo conectado",
+  "short_name": "Machly",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F1F5F2",
+  "theme_color": "#14281D",
+  "description": "Alquiler local de maquinaria agrícola y vehículos.",
+  "icons": [{ "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

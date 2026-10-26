@@ -1,0 +1,401 @@
+openapi: 3.1.0
+info:
+  title: Machly API
+  version: 2.0.0
+  description: API compartida para la web y las aplicaciones móviles de alquiler de maquinaria agrícola y vehículos.
+servers:
+  - url: http://localhost:3000
+    description: Computadora local
+  - url: http://10.0.2.2:3000
+    description: Emulador Android
+tags:
+  - name: Sistema
+  - name: Autenticación
+  - name: Equipos
+  - name: Reservas
+  - name: Favoritos
+  - name: Reseñas
+paths:
+  /api/health:
+    get:
+      tags: [Sistema]
+      summary: Verificar disponibilidad del servidor
+      responses:
+        '200':
+          description: Servidor operativo
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Health'}
+  /api/auth/register:
+    post:
+      tags: [Autenticación]
+      summary: Registrar cliente o propietario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RegisterRequest'}
+      responses:
+        '201':
+          description: Cuenta creada
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AuthResponse'}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '409': {description: El correo ya existe}
+  /api/auth/login:
+    post:
+      tags: [Autenticación]
+      summary: Iniciar sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/LoginRequest'}
+      responses:
+        '200':
+          description: Sesión iniciada
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AuthResponse'}
+        '401': {description: Credenciales incorrectas}
+  /api/auth/me:
+    get:
+      tags: [Autenticación]
+      summary: Obtener usuario autenticado
+      security: [{bearerAuth: []}]
+      responses:
+        '200':
+          description: Perfil actual
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/User'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+  /api/categories:
+    get:
+      tags: [Equipos]
+      summary: Listar categorías disponibles
+      responses:
+        '200':
+          description: Categorías con cantidad de publicaciones
+  /api/equipment:
+    get:
+      tags: [Equipos]
+      summary: Buscar equipos
+      parameters:
+        - {name: search, in: query, schema: {type: string}}
+        - {name: type, in: query, schema: {type: string, enum: [machinery, vehicle]}}
+        - {name: category, in: query, schema: {type: string}}
+        - {name: city, in: query, schema: {type: string}}
+        - {name: minPrice, in: query, schema: {type: number}}
+        - {name: maxPrice, in: query, schema: {type: number}}
+        - {name: startDate, in: query, schema: {type: string, format: date}}
+        - {name: endDate, in: query, schema: {type: string, format: date}}
+        - {name: sort, in: query, schema: {type: string, enum: [price_asc, price_desc, newest, rating]}}
+        - {name: page, in: query, schema: {type: integer, minimum: 1, default: 1}}
+        - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 100, default: 24}}
+      responses:
+        '200':
+          description: Resultado paginado
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/EquipmentPage'}
+    post:
+      tags: [Equipos]
+      summary: Publicar un equipo
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EquipmentInput'}
+      responses:
+        '201':
+          description: Equipo publicado
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Equipment'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+  /api/equipment/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: integer}}
+    get:
+      tags: [Equipos]
+      summary: Obtener detalles y disponibilidad
+      responses:
+        '200':
+          description: Equipo, reseñas y fechas ocupadas
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Equipment'}
+        '404': {description: Equipo no encontrado}
+    put:
+      tags: [Equipos]
+      summary: Actualizar un equipo propio
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EquipmentInput'}
+      responses:
+        '200': {description: Equipo actualizado}
+        '403': {$ref: '#/components/responses/Forbidden'}
+    delete:
+      tags: [Equipos]
+      summary: Desactivar un equipo propio
+      security: [{bearerAuth: []}]
+      responses:
+        '204': {description: Equipo desactivado}
+        '403': {$ref: '#/components/responses/Forbidden'}
+  /api/my/equipment:
+    get:
+      tags: [Equipos]
+      summary: Listar publicaciones del propietario
+      security: [{bearerAuth: []}]
+      responses:
+        '200':
+          description: Equipos propios
+          content:
+            application/json:
+              schema: {type: array, items: {$ref: '#/components/schemas/Equipment'}}
+  /api/bookings:
+    get:
+      tags: [Reservas]
+      summary: Listar reservas propias o solicitudes recibidas
+      security: [{bearerAuth: []}]
+      parameters:
+        - name: scope
+          in: query
+          description: Usa owner para solicitudes del propietario y all para administrador.
+          schema: {type: string, enum: [owner, all]}
+      responses:
+        '200':
+          description: Reservas
+          content:
+            application/json:
+              schema: {type: array, items: {$ref: '#/components/schemas/Booking'}}
+    post:
+      tags: [Reservas]
+      summary: Solicitar una reserva
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/BookingInput'}
+      responses:
+        '201':
+          description: Reserva solicitada
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Booking'}
+        '409': {description: Fechas no disponibles}
+  /api/bookings/{id}/status:
+    patch:
+      tags: [Reservas]
+      summary: Cambiar estado de una reserva
+      security: [{bearerAuth: []}]
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: integer}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: {type: string, enum: [confirmed, rejected, cancelled, active, completed]}
+      responses:
+        '200': {description: Estado actualizado}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+  /api/favorites:
+    get:
+      tags: [Favoritos]
+      summary: Listar favoritos
+      security: [{bearerAuth: []}]
+      responses:
+        '200':
+          description: Equipos favoritos
+          content:
+            application/json:
+              schema: {type: array, items: {$ref: '#/components/schemas/Equipment'}}
+  /api/favorites/{equipmentId}:
+    parameters:
+      - {name: equipmentId, in: path, required: true, schema: {type: integer}}
+    post:
+      tags: [Favoritos]
+      summary: Añadir favorito
+      security: [{bearerAuth: []}]
+      responses:
+        '201': {description: Añadido}
+    delete:
+      tags: [Favoritos]
+      summary: Eliminar favorito
+      security: [{bearerAuth: []}]
+      responses:
+        '204': {description: Eliminado}
+  /api/reviews:
+    post:
+      tags: [Reseñas]
+      summary: Calificar una reserva completada
+      security: [{bearerAuth: []}]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [bookingId, rating]
+              properties:
+                bookingId: {type: integer}
+                rating: {type: integer, minimum: 1, maximum: 5}
+                comment: {type: string, maxLength: 600}
+      responses:
+        '201': {description: Reseña creada}
+  /api/dashboard:
+    get:
+      tags: [Sistema]
+      summary: Métricas del usuario actual
+      security: [{bearerAuth: []}]
+      responses:
+        '200': {description: Métricas según el rol}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    BadRequest:
+      description: Datos no válidos
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    Unauthorized:
+      description: Token ausente, inválido o vencido
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    Forbidden:
+      description: El usuario no tiene permiso
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+  schemas:
+    Error:
+      type: object
+      properties:
+        error: {type: string}
+    Health:
+      type: object
+      properties:
+        status: {type: string, example: ok}
+        service: {type: string, example: Machly API}
+        version: {type: string, example: 2.0.0}
+        time: {type: string, format: date-time}
+    RegisterRequest:
+      type: object
+      required: [fullName, email, password]
+      properties:
+        fullName: {type: string, minLength: 3, example: Ana Productora}
+        email: {type: string, format: email, example: ana@example.com}
+        phone: {type: string, example: '70000000'}
+        password: {type: string, minLength: 8, example: segura123}
+        role: {type: string, enum: [renter, owner], default: renter}
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: {type: string, format: email, example: cliente@machly.local}
+        password: {type: string, format: password, example: machly123}
+    AuthResponse:
+      type: object
+      properties:
+        token: {type: string}
+        expiresIn: {type: integer, example: 604800}
+        user: {$ref: '#/components/schemas/User'}
+    User:
+      type: object
+      properties:
+        id: {type: integer}
+        fullName: {type: string}
+        email: {type: string, format: email}
+        phone: {type: string}
+        role: {type: string, enum: [renter, owner, admin]}
+        createdAt: {type: string}
+    EquipmentInput:
+      type: object
+      required: [type, category, name, brand, model, year, priceDay, city, province, description]
+      properties:
+        type: {type: string, enum: [machinery, vehicle]}
+        category: {type: string, example: Tractores}
+        name: {type: string, example: Tractor John Deere 6110J}
+        brand: {type: string, example: John Deere}
+        model: {type: string, example: 6110J}
+        year: {type: integer, example: 2022}
+        priceDay: {type: number, example: 1450}
+        deposit: {type: number, minimum: 0, example: 3000}
+        city: {type: string, example: Santa Cruz de la Sierra}
+        province: {type: string, example: Santa Cruz}
+        description: {type: string, minLength: 20}
+        features: {type: array, items: {type: string}}
+        image: {type: string, example: /assets/equipment/tractor.svg}
+        status: {type: string, enum: [available, maintenance, inactive]}
+    Equipment:
+      type: object
+      properties:
+        id: {type: integer}
+        owner_id: {type: integer}
+        type: {type: string, enum: [machinery, vehicle]}
+        category: {type: string}
+        name: {type: string}
+        brand: {type: string}
+        model: {type: string}
+        year: {type: integer}
+        price_day: {type: number}
+        deposit: {type: number}
+        city: {type: string}
+        province: {type: string}
+        description: {type: string}
+        features: {type: array, items: {type: string}}
+        image: {type: string}
+        status: {type: string}
+        owner_name: {type: string}
+        rating: {type: number}
+        reviews_count: {type: integer}
+        is_favorite: {type: boolean}
+    EquipmentPage:
+      type: object
+      properties:
+        items: {type: array, items: {$ref: '#/components/schemas/Equipment'}}
+        page: {type: integer}
+        limit: {type: integer}
+        total: {type: integer}
+        pages: {type: integer}
+    BookingInput:
+      type: object
+      required: [equipmentId, startDate, endDate]
+      properties:
+        equipmentId: {type: integer, example: 1}
+        startDate: {type: string, format: date, example: '2027-02-10'}
+        endDate: {type: string, format: date, example: '2027-02-12'}
+        message: {type: string, maxLength: 500}
+    Booking:
+      type: object
+      properties:
+        id: {type: integer}
+        equipment_id: {type: integer}
+        renter_id: {type: integer}
+        start_date: {type: string, format: date}
+        end_date: {type: string, format: date}
+        days: {type: integer}
+        subtotal: {type: number}
+        service_fee: {type: number}
+        total: {type: number}
+        status: {type: string, enum: [requested, confirmed, active, completed, cancelled, rejected]}
+        equipment_name: {type: string}
+        image: {type: string}

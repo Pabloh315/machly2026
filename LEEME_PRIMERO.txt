@@ -1,0 +1,23 @@
+MACHLY - FORMA CORRECTA DE ABRIR
+================================
+
+1. Haz doble clic en: ABRIR_MACHLY.bat
+2. Espera unos segundos.
+3. Machly se abrirá automáticamente en el navegador.
+
+NO abras modern\index.html directamente.
+Ese archivo es parte del código fuente y necesita el servidor local para cargar:
+- estilos CSS
+- tipografías
+- imágenes
+- JavaScript
+- base de datos
+- API de usuarios y reservas
+
+Dirección correcta en la computadora:
+http://localhost:3000/
+
+Dirección detectada para teléfonos en la misma Wi-Fi:
+http://192.168.100.25:3000/
+
+Si Windows solicita permiso de red para Node.js, permite solamente Redes privadas.

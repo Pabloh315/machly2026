@@ -1,0 +1,10 @@
+{
+  "name": "Machly — Alquiler de maquinaria",
+  "short_name": "Machly",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f4ee",
+  "theme_color": "#143c2c",
+  "description": "Alquiler local de maquinaria agrícola y vehículos.",
+  "icons": [{ "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

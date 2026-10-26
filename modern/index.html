@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14281D">
+  <meta name="description" content="Machly conecta al campo con maquinaria y vehículos confiables.">
+  <title>Machly — Equipos para hacer crecer el campo</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="offlineBanner" class="offline-banner" hidden>Sin conexión con el servidor. Comprueba que la computadora esté encendida y conectada a la misma red.</div>
+
+  <div class="utility-bar"><span>Red local segura</span><p>Alquiler de maquinaria y vehículos agrícolas en Bolivia</p><span>Soporte directo</span></div>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio de Machly">
+      <span class="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 29V12l10 11 10-11v17"/><path d="M25 8c5-5 10-3 10-3s0 6-8 8"/></svg></span>
+      <span class="brand-name">MACHLY<small>Campo conectado</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#catalogo">Equipos</a><a href="#como-funciona">Cómo funciona</a></nav>
+    <div class="header-actions">
+      <button class="icon-button" id="favoritesButton" title="Favoritos" aria-label="Ver favoritos"><svg viewBox="0 0 24 24"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg></button>
+      <button class="button button-ghost" id="loginButton">Ingresar</button>
+      <button class="button button-primary" id="registerButton">Crear cuenta</button>
+      <button class="user-menu" id="userMenuButton" hidden><span id="userInitial">U</span><span id="userName">Mi cuenta</span><b>⌄</b></button>
+    </div>
+  </header>
+
+  <main id="homeView">
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="hero-index"><span>01</span><i></i><span>Machly Bolivia</span></div>
+        <p class="eyebrow">Equipos que impulsan tu producción</p>
+        <h1>El campo no espera.<br><em>Tu maquinaria tampoco.</em></h1>
+        <p class="hero-lead">Encuentra equipos confiables cerca de ti, revisa su disponibilidad y reserva sin vueltas.</p>
+        <div class="hero-actions"><a href="#catalogo" class="button button-primary">Explorar equipos <span>↗</span></a><a href="#como-funciona" class="quiet-link">Conoce cómo funciona <span>↓</span></a></div>
+        <div class="hero-metrics"><div><strong>+240</strong><small>productores activos</small></div><div><strong>8 dep.</strong><small>cobertura local</small></div><div><strong>4.9/5</strong><small>valoración media</small></div></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-label"><span>Disponible ahora</span><strong>John Deere 6110J</strong><small>Santa Cruz · desde Bs 1.450/día</small></div>
+        <div class="sun"></div><div class="furrows"></div>
+        <img src="/assets/equipment/tractor.svg" alt="">
+        <span class="vertical-note">MAQUINARIA · VEHÍCULOS · CAMPO</span>
+      </div>
+      <form class="hero-search" id="heroSearchForm">
+        <div class="search-title"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span><strong>Encuentra tu equipo</strong><small>Disponibilidad real, cerca de ti</small></span></div>
+        <label><span>¿Qué necesitas?</span><input id="heroSearch" placeholder="Tractor, camioneta, cosechadora…"></label>
+        <label><span>Ubicación</span><select id="heroCity"><option value="">Toda Bolivia</option><option>Santa Cruz de la Sierra</option><option>Montero</option><option>Cochabamba</option><option>La Paz</option><option>Tarija</option></select></label>
+        <button class="search-submit"><span>Buscar</span><b>→</b></button>
+      </form>
+    </section>
+
+    <section class="promise-strip" aria-label="Ventajas de Machly">
+      <div><span>01</span><strong>Equipos verificados</strong><small>Información clara y propietarios identificados.</small></div>
+      <div><span>02</span><strong>Reserva con confianza</strong><small>Fechas y costos visibles desde el inicio.</small></div>
+      <div><span>03</span><strong>Soporte local</strong><small>Personas reales para ayudarte cuando lo necesites.</small></div>
+    </section>
+
+    <section class="section category-section">
+      <header class="section-heading"><div><p class="eyebrow">Trabaja con lo necesario</p><h2>Soluciones para cada labor</h2></div><p class="section-intro">Desde la preparación del suelo hasta el traslado de tu equipo. Busca por tipo de trabajo, no por complicaciones.</p></header>
+      <div class="category-grid" id="categoryGrid">
+        <button data-type="machinery" data-category="Tractores"><span class="category-number">01</span><span class="category-icon"><svg viewBox="0 0 48 48"><circle cx="14" cy="35" r="8"/><circle cx="37" cy="36" r="5"/><path d="M19 35h13l-3-15H18l-4 7H7v8M21 20V10h8l5 11M5 27h11"/></svg></span><span><strong>Tractores</strong><small>Potencia para cada terreno</small></span><b>↗</b></button>
+        <button data-type="machinery" data-category="Cosechadoras"><span class="category-number">02</span><span class="category-icon"><svg viewBox="0 0 48 48"><circle cx="30" cy="34" r="7"/><circle cx="41" cy="36" r="4"/><path d="M20 17h17l5 13H23zM20 25l-9 5v7h12M11 32H2m9 4H2M28 17V9h9l2 8"/></svg></span><span><strong>Cosecha</strong><small>Rendimiento por hectárea</small></span><b>↗</b></button>
+        <button data-type="machinery" data-category="Excavadoras"><span class="category-number">03</span><span class="category-icon"><svg viewBox="0 0 48 48"><path d="M19 35h24v7H14a5 5 0 0 1 5-7ZM22 35l4-15h12l4 15M27 20 15 10 6 13M6 13l-3 16h8M28 20v-8h8l2 8"/></svg></span><span><strong>Obra rural</strong><small>Excavación y movimiento</small></span><b>↗</b></button>
+        <button data-type="vehicle" data-category="Camionetas"><span class="category-number">04</span><span class="category-icon"><svg viewBox="0 0 48 48"><circle cx="13" cy="35" r="6"/><circle cx="37" cy="35" r="6"/><path d="M7 35H3V22h15l5-9h11l5 9h6v13h-2M19 35h12M18 22h21M28 13v9"/></svg></span><span><strong>Vehículos 4×4</strong><small>Movilidad sin límites</small></span><b>↗</b></button>
+      </div>
+    </section>
+
+    <section class="section catalog-section" id="catalogo">
+      <header class="section-heading catalog-heading"><div><p class="eyebrow">Disponibles esta temporada</p><h2>Equipos cerca de ti</h2></div><div class="segmented"><button class="active" data-type="">Todos</button><button data-type="machinery">Maquinaria</button><button data-type="vehicle">Vehículos</button></div></header>
+      <form class="filter-bar" id="filterForm">
+        <label class="wide"><span>Buscar equipo</span><input name="search" placeholder="Marca, modelo o categoría"></label>
+        <label><span>Ciudad</span><select name="city"><option value="">Todas</option><option>Santa Cruz de la Sierra</option><option>Montero</option><option>Cochabamba</option><option>La Paz</option><option>Tarija</option></select></label>
+        <label><span>Desde</span><input type="date" name="startDate"></label>
+        <label><span>Hasta</span><input type="date" name="endDate"></label>
+        <label><span>Ordenar</span><select name="sort"><option value="">Recomendados</option><option value="price_asc">Menor precio</option><option value="price_desc">Mayor precio</option><option value="rating">Mejor valorados</option><option value="newest">Más recientes</option></select></label>
+        <button class="button button-dark">Aplicar</button>
+      </form>
+      <div class="results-meta"><span id="resultsCount">Cargando equipos…</span><button class="clear-button" id="clearFilters" type="button">Limpiar filtros</button></div>
+      <div class="equipment-grid" id="equipmentGrid" aria-live="polite"></div>
+      <button class="button button-outline load-more" id="loadMoreButton" hidden>Ver más equipos</button>
+    </section>
+
+    <section class="how-section" id="como-funciona">
+      <div class="how-visual"><span class="outline-word">CAMPO</span><img src="/assets/equipment/harvester.svg" alt="Cosechadora trabajando"><div class="how-caption"><strong>Menos tiempo buscando.</strong><span>Más tiempo produciendo.</span></div></div>
+      <div class="how-content"><p class="eyebrow light">Simple de principio a fin</p><h2>Tres pasos.<br>Sin letra pequeña.</h2><div class="steps"><article><span>01</span><div><strong>Encuentra</strong><p>Filtra por equipo, ciudad y fechas disponibles.</p></div></article><article><span>02</span><div><strong>Solicita</strong><p>Conoce el costo completo y envía tu reserva.</p></div></article><article><span>03</span><div><strong>Coordina</strong><p>Habla con el propietario y empieza el trabajo.</p></div></article></div><a href="#catalogo" class="button button-fawn">Buscar equipos <span>→</span></a></div>
+    </section>
+
+    <section class="owner-cta"><div class="owner-number">02</div><div><p class="eyebrow">Tu equipo también produce</p><h2>Convierte maquinaria parada<br>en una nueva oportunidad.</h2><p>Publica, recibe solicitudes y organiza tus alquileres desde un panel simple.</p></div><button class="button button-primary" id="ownerCtaButton">Publicar un equipo <span>↗</span></button></section>
+  </main>
+
+  <main id="dashboardView" class="dashboard" hidden>
+    <aside class="dashboard-sidebar"><a class="brand dashboard-brand" href="#inicio"><span class="brand-mark"><svg viewBox="0 0 40 40"><path d="M10 29V12l10 11 10-11v17"/></svg></span><span class="brand-name">MACHLY</span></a><div><p class="eyebrow light">Mi espacio</p><h2 id="dashboardGreeting">Hola</h2><p id="dashboardRole">Tu actividad</p></div><nav id="dashboardNav"><button class="active" data-panel="summary">Resumen</button><button data-panel="bookings">Mis reservas</button><button data-panel="favorites">Favoritos</button><button data-panel="listings" class="owner-only">Mis equipos</button><button data-panel="requests" class="owner-only">Solicitudes</button></nav><button class="button button-outline" id="backHomeButton">← Volver al catálogo</button><button class="logout-link" id="logoutButton">Cerrar sesión</button></aside>
+    <section class="dashboard-content"><div id="dashboardPanel"></div></section>
+  </main>
+
+  <footer><div><a class="brand footer-brand" href="#inicio"><span class="brand-mark"><svg viewBox="0 0 40 40"><path d="M10 29V12l10 11 10-11v17"/></svg></span><span class="brand-name">MACHLY<small>Campo conectado</small></span></a><p>Herramientas confiables para quienes hacen producir la tierra.</p></div><div class="footer-links"><a href="#catalogo">Explorar equipos</a><a href="#como-funciona">Cómo funciona</a><button id="footerOwner">Publicar maquinaria</button></div><small>© 2026 Machly · Hecho para el campo boliviano</small></footer>
+
+  <nav class="mobile-nav"><a href="#inicio"><span>⌂</span>Inicio</a><a href="#catalogo"><span>⌕</span>Explorar</a><button id="mobileFavorites"><span>♡</span>Favoritos</button><button id="mobileAccount"><span>○</span>Cuenta</button></nav>
+  <dialog id="detailDialog" class="modal detail-modal"><button class="modal-close" data-close="detailDialog" aria-label="Cerrar">×</button><div id="detailContent"></div></dialog>
+  <dialog id="authDialog" class="modal auth-modal"><button class="modal-close" data-close="authDialog" aria-label="Cerrar">×</button><div class="auth-brand"><span class="brand-mark">M</span><span>MACHLY</span></div><div class="auth-tabs"><button data-auth-tab="login" class="active">Ingresar</button><button data-auth-tab="register">Crear cuenta</button></div><div id="authContent"></div></dialog>
+  <dialog id="bookingDialog" class="modal booking-modal"><button class="modal-close" data-close="bookingDialog" aria-label="Cerrar">×</button><div id="bookingContent"></div></dialog>
+  <dialog id="listingDialog" class="modal listing-modal"><button class="modal-close" data-close="listingDialog" aria-label="Cerrar">×</button><div id="listingContent"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <template id="cardSkeleton"><div class="equipment-card skeleton"><div class="skeleton-image"></div><div class="card-body"><i></i><i></i><i></i></div></div></template>
+  <script src="/app.js" defer></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>document.getElementById('footerOwner')?.addEventListener('click',()=>document.getElementById('ownerCtaButton').click()))</script>
+</body>
+</html>
