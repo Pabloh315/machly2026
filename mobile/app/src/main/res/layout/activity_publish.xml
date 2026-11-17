@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circle_white"
+            android:contentDescription="Volver"
+            android:src="@android:drawable/ic_menu_revert" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nueva publicación"
+            android:textAllCaps="true"
+            android:textColor="@color/olive_hint"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Publicar un equipo"
+            android:textColor="@color/ink"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spType"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_search_field"
+            android:paddingHorizontal="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Categoría">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etCategory" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Tractores" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Título">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etName" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Marca">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etBrand" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Modelo">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etModel" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Año">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etYear" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Precio por día">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etPrice" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Garantía / depósito">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etDeposit" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Ciudad">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etCity" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Provincia">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etProvince" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Descripción (mín. 20 caracteres)">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textMultiLine" android:minLines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="Características (separadas por coma)">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etFeatures" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/status_error_bg"
+            android:padding="10dp"
+            android:textColor="@color/danger"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            style="@style/Widget.Machly.Button"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="Publicar equipo" />
+    </LinearLayout>
+</ScrollView>
