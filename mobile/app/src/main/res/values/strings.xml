@@ -1,1 +1,21 @@
-<resources><string name="app_name">Machly</string></resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Machly</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_explore">Explorar</string>
+    <string name="nav_favorites">Favoritos</string>
+    <string name="nav_account">Cuenta</string>
+    <string name="login">Ingresar a Machly</string>
+    <string name="register">Crear cuenta</string>
+    <string name="role_renter">Arrendatario</string>
+    <string name="role_owner">Propietario</string>
+    <string name="available">Disponible</string>
+    <string name="clear_filters">Limpiar filtros</string>
+    <string name="equipments_found">%d equipos encontrados</string>
+    <string name="price_day">/ día</string>
+    <string name="demo_account">Cuentas de prueba\nArrendatario: cliente@machly.local / machly123\nPropietario: propietario@machly.local / machly123</string>
+    <string name="welcome_back">Bienvenido de nuevo</string>
+    <string name="create_account">Crea tu cuenta</string>
+    <string name="login_subtitle">Ingresa para administrar tus reservas y equipos.</string>
+    <string name="register_subtitle">Reserva equipos o publica los tuyos en pocos minutos.</string>
+</resources>

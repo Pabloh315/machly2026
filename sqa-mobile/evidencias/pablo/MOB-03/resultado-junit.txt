@@ -1,0 +1,8 @@
+﻿# Resultado JUnit
+
+Ejecución real: `testDebugUnitTest` el 2026-11-17.
+
+- Resultado: BUILD SUCCESSFUL.
+- Suite: `BookingCalculatorTest` y `SessionStateTest`.
+- Pruebas: 9 aprobadas, 0 fallidas, 0 omitidas.
+- Reporte HTML: `mobile/app/build/reports/tests/testDebugUnitTest/index.html` (generado localmente, no versionado).

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cream">#F5F4EE</color>
+    <color name="paper">#FFFEF9</color>
+    <color name="forest">#143C2C</color>
+    <color name="forest_2">#1E513B</color>
+    <color name="leaf">#79A74C</color>
+    <color name="lime">#BEDC75</color>
+    <color name="warm">#E8B85A</color>
+    <color name="ink">#17201B</color>
+    <color name="muted">#68736C</color>
+    <color name="olive_hint">#5E873C</color>
+    <color name="line">#DDE1D8</color>
+    <color name="danger">#B6483E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="card_image_bg">#CFD8CA</color>
+    <color name="chip_bg">#E8EFDD</color>
+    <color name="status_available_bg">#E2EBDF</color>
+    <color name="status_requested_bg">#F2E6CA</color>
+    <color name="status_error_bg">#F7DFDD</color>
+
+    <color name="primary">@color/forest</color>
+    <color name="primary_variant">@color/forest_2</color>
+    <color name="secondary">@color/leaf</color>
+    <color name="secondary_variant">@color/lime</color>
+    <color name="background_light">@color/cream</color>
+    <color name="surface_card">@color/paper</color>
+    <color name="text_primary">@color/ink</color>
+    <color name="text_secondary">@color/muted</color>
+    <color name="divider">@color/line</color>
+    <color name="success">@color/leaf</color>
+    <color name="error">@color/danger</color>
+</resources>
